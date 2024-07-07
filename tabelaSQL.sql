@@ -1,3 +1,7 @@
+
+--  Ex: 02 - criação da tabela clients
+
+
 create table clients (
 	id serial primary key,
 	name varchar(150) not null,
