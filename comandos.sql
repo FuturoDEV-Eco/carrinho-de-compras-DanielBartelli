@@ -10,7 +10,7 @@ create table clients (
 	contact varchar(20) not null
 )
 
--- Exercicio 3 - criação da tabela categorias
+-- Ex: 03 - criação da tabela categorias
 create table categories (
 	id SERIAL PRIMARY KEY,
 	nome VARCHAR(150) not null
@@ -41,4 +41,23 @@ insert INTO categories (nome)
 		FOREIGN KEY (category_id) REFERENCES categories (id)
 	)
 
+	-- Ex: 06 - Cadastro pedido
 
+	create table orders (
+		id SERIAL PRIMARY KEY,
+		client_id INT not null,
+		total decimal(10,2) not null,
+		address text not null,
+		observations text,
+		FOREIGN KEY (client_id) references clients (id)
+	)
+
+	create table orders_items(
+		id SERIAL PRIMARY KEY,
+		order_id INT not null,
+		product_id INT not null,
+		amount int not null,
+		price decimal (10, 2) not null,
+		FOREIGN KEY (order_id) references orders (id),
+		FOREIGN KEY (product_id) references products (id)
+	)

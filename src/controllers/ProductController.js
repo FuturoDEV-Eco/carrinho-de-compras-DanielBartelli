@@ -41,7 +41,7 @@ class ProductController{
             const produtos = await conexao.query("select * from products")
             response.json(produtos.rows)
         } catch (error) {
-            response.status(500).json({ mensagem: 'Não possivel listar os produtos' })
+            response.status(500).json({ mensagem: 'Erro ao listar os produtos' })
         }
     }
 
@@ -55,7 +55,7 @@ class ProductController{
                 FROM products p
                 INNER JOIN categories c ON p.category_id = c.id 
                 WHERE p.id = ${id}`)
-                
+
             if (produto.rows.length > 0) {
                 response.status(200).json(produto.rows[0])
             }else {
