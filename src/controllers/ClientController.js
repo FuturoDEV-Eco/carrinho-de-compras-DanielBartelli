@@ -35,4 +35,4 @@ class ClientController {
     }
 }
 
-module.exports = new ClientController()
+module.exports = new ClientController();

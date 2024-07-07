@@ -18,4 +18,4 @@ class OrderController {
         }
     }
 }
-module.exports = new OrderController
+module.exports = new OrderController();

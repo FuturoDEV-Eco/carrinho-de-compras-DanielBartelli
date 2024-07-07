@@ -3,6 +3,6 @@ const OrderController = require('../controllers/OrderController')
 
 const ordersRoutes = new Router()
 
-ordersRoutes.post('/', OrderController.cart)
+ordersRoutes.post('/pedido', OrderController.cart)
 
 module.exports = ordersRoutes

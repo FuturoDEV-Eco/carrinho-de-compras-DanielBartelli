@@ -3,6 +3,6 @@ const ClientController = require('../controllers/ClientController')
 
 const clientsRoutes = new Router()
 
-clientsRoutes.post("/", ClientController.criar)
+clientsRoutes.post("/cadastro", ClientController.criar)
 
 module.exports = clientsRoutes

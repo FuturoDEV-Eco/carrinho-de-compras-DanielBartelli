@@ -26,7 +26,6 @@ class ProductController{
                     (name, amount, color, voltage, description, category_id, price)
                     values
                     ($1, $2, $3, $4, $5, $6, $7)
-                    returning *
                 `, [dados.name, dados.amount, dados.color, dados.voltage, dados.description, dados.category_id, dados.price])
 
             response.status(201).json(produto.rows[0])
@@ -69,4 +68,4 @@ class ProductController{
 
 
 
-module.exports = new ProductController()
+module.exports = new ProductController();
