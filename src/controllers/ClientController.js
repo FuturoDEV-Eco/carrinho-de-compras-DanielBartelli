@@ -20,10 +20,17 @@ class ClientController {
             }
 
             await conexao.query(`
-                INSERT into clients
-                (name, email, cpf, contact)
-                VALUES
-                ($1, $2, $3, $4)
+                INSERT into clients (
+                name,
+                email,
+                cpf,
+                contact
+                )
+                VALUES (
+                $1,
+                $2,$3,
+                $4
+                )
             `, [dados.name, dados.email, dados.cpf, dados.contact])
 
             response.status(201).json()
