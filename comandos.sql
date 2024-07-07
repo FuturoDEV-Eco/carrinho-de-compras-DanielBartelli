@@ -13,27 +13,25 @@ create table clients (
 -- Ex: 03 - criação da tabela categorias
 create table categories (
 	id SERIAL PRIMARY KEY,
-	nome VARCHAR(150) not null
+	name VARCHAR(150) not null
 )
 
-insert INTO categories (nome)
-		
-		Values
-		('Jogos'),
-		('Alimentos'),
-		('Mobilia'),
-		('Smartphones'),
-		('Higiene&limpeza'),
-		('Pets'),
-		('Vestuario'),
-		('Eletronicos'),
-		('Outros')
+insert INTO categories (name) Values
+	('Jogos'),
+	('Alimentos'),
+	('Mobilia'),
+	('Smartphones'),
+	('Higiene&limpeza'),
+	('Pets'),
+	('Vestuario'),
+	('Eletronicos'),
+	('Outros')
 
 
 	-- criação da tabela produtos
 create table products (
 	id SERIAL PRIMARY KEY,
-	nome VARCHAR(150) not null,
+	name VARCHAR(150) not null,
 	amount INTEGER default 0,
 	color VARCHAR(50),
 	voltage NUMERIC(3, 0),

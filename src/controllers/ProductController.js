@@ -22,10 +22,24 @@ class ProductController{
             }
 
             const produto = await conexao.query(`
-                INSERT into products
-                    (name, amount, color, voltage, description, category_id, price)
-                    values
-                    ($1, $2, $3, $4, $5, $6, $7)
+                INSERT into products (
+                    name,
+                    amount, 
+                    color,
+                    voltage,
+                    description,
+                    category_id,
+                    price
+                    )
+                    values (
+                    $1,
+                    $2,
+                    $3,
+                    $4,
+                    $5,
+                    $6,
+                    $7
+                    )
                 `, [dados.name, dados.amount, dados.color, dados.voltage, dados.description, dados.category_id, dados.price])
 
             response.status(201).json(produto.rows[0])
@@ -44,7 +58,7 @@ class ProductController{
         }
     }
 
-    //Listador de detalhes dos Produtos
+    //Listador de detalhes
     async listarProduto(request, response) {
         try {
             const id = request.params.id
@@ -61,7 +75,7 @@ class ProductController{
                 response.status(404).json({ mensagem: 'Produto não encontrado' })
             }
         } catch (error) {
-            response.status(500).json({ mensagem: "Erro ao carregar o produto" })
+            response.status(500).json({ mensagem: "Erro ao carregar produto" })
         }
     }
 }
