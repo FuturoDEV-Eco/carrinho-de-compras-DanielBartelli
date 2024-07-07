@@ -9,13 +9,55 @@ const conexao = new Pool({
 })
 
 
-class OrderController {
+class OrderController{
+
     async cart(request,response) {
         try {
             const dados = request.body
+            let total = 0;
+
+            for (let i = 0; i < dados.products.length; i++) {
+                const items = dados.products[i];
+                const produto = await conexao.query(`
+                    SELECT price FROM products 
+                    WHERE id = $1
+                `, [items.product_id]);
+    
+                total = total + (produto.rows[0].price * items.amount);
+            }
+    
+            // INSERIR o pedido 
+            const pedido = await conexao.query(`
+                INSERT INTO orders (client_id, address, observations, total)
+                values ($1,$2,$3,$4)
+                returning *
+                `, [dados.client_id, dados.address, dados.observations, total])
+    
+            // INSERIR os items
+            dados.products.forEach(async item => {
+                const produto = await conexao.query(`
+                    SELECT price from products 
+                    where id = $1
+                    `, [item.product_id])
+    
+                conexao.query(`
+                    INSERT INTO orders_items (order_id, product_id, amount, price)
+                    values ($1,$2,$3,$4)
+                    returning *
+                    `, [
+                    pedido.rows[0].id,
+                    item.product_id,
+                    item.amount,
+                    produto.rows[0].price
+                ])
+            })
+          
+            response.status(201).json({mensagem: 'criado com sucesso'})
         } catch (error) {
-            response.status(500).json()
+            response.status(500).json({ mensagem: 'Não possivel montar o carrinho '})
         }
     }
+
 }
-module.exports = new OrderController();
+
+module.exports = new OrderController()
