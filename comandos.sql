@@ -29,6 +29,7 @@ insert INTO categories (nome)
 		('Eletronicos'),
 		('Outros')
 
+
 	-- criação da tabela produtos
 	create table products (
 		id SERIAL PRIMARY KEY,
