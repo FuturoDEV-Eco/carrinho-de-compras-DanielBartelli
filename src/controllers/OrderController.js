@@ -26,14 +26,13 @@ class OrderController{
                 total = total + (produto.rows[0].price * items.amount);
             }
     
-            // INSERIR o pedido 
+            // inserir pedido 
             const pedido = await conexao.query(`
                 INSERT INTO orders (client_id, address, observations, total)
                 values ($1,$2,$3,$4)
                 returning *
                 `, [dados.client_id, dados.address, dados.observations, total])
     
-            // INSERIR os items
             dados.products.forEach(async item => {
                 const produto = await conexao.query(`
                     SELECT price from products 
