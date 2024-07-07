@@ -51,9 +51,9 @@ class OrderController{
                 ])
             })
           
-            response.status(201).json({mensagem: 'criado com sucesso'})
+            response.status(201).json()
         } catch (error) {
-            response.status(500).json({ mensagem: 'Não possivel montar o carrinho '})
+            response.status(500).json({ mensagem: 'Erro ao montar o carrinho'})
         }
     }
 
