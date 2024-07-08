@@ -1,10 +1,10 @@
 const { Pool } = require('pg')
 
 const conexao = new Pool({
-    host: 'localhost',        
-    port: 3000,
-    user: 'postgres',     
-    password: '37334355',     
+    host: 'localhost',
+    port: 5432,
+    user: 'postgres',
+    password: '37334355',
     database: 'api_carrinho_de_compras'
 })
 
