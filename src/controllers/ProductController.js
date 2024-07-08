@@ -1,7 +1,7 @@
 const { Pool } = require('pg')
 
 const conexao = new Pool({
-    host: 'localhost',        
+    host: 'localhost',
     port: 5432,
     user: 'postgres',     
     password: '37334355',     
@@ -12,19 +12,19 @@ class ProductController{
 
     async criar(request, response) {
         try {
-            const dados = request.query
+            const dados = request.body;
 
             if (!dados.name || !dados.category_id) {
 
                 return response.status(400).json({
-                    mensagem: 'Preencha todos os campos!'
+                    mensagem: 'name e category sao obrigatorios!!'
                 })
             }
 
             const produto = await conexao.query(`
                 INSERT into products (
                     name,
-                    amount, 
+                    amount,
                     color,
                     voltage,
                     description,
@@ -39,7 +39,7 @@ class ProductController{
                     $5,
                     $6,
                     $7
-                    )
+                    ) returning *
                 `, [dados.name, dados.amount, dados.color, dados.voltage, dados.description, dados.category_id, dados.price])
 
             response.status(201).json(produto.rows[0])

@@ -29,16 +29,19 @@ insert INTO categories (name) Values
 
 
 	-- criação da tabela produtos
-create table products (
-	id SERIAL PRIMARY KEY,
-	name VARCHAR(150) not null,
-	amount INTEGER default 0,
-	color VARCHAR(50),
-	voltage NUMERIC(3, 0),
-	description TEXT,
-	category_id INTEGER not null,
-	FOREIGN KEY (category_id) REFERENCES categories (id)
-)
+CREATE TABLE products (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(150) NOT NULL,
+    amount VARCHAR(150) UNIQUE DEFAULT '0',
+    color VARCHAR(50),
+    voltage INTEGER CHECK (voltage IN (110, 220)),
+    description TEXT,
+    category_id INTEGER NOT NULL,
+    price DECIMAL(10,2),
+    CONSTRAINT fk_category
+        FOREIGN KEY(category_id) 
+            REFERENCES categories(id)
+	);
 
 	-- Ex: 06 - Cadastro pedido
 

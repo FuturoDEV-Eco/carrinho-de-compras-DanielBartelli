@@ -11,6 +11,6 @@ app.use('/clients', clientsRoutes)
 app.use('/products', productsRoutes)
 app.use('/orders', ordersRoutes)
 
-app.listen(5432, () => {
+app.listen(3000, () => {
     console.log("Servidor Online! (^-^)")
 });
